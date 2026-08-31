@@ -1,6 +1,6 @@
 ---
-name: oil-visual
-description: "Create a consistent oil-style visual system in two modes: finished explanatory images with short accurate labels generated directly inside the scene, and transparent character illustrations produced with a bundled background-removal script. Use for concepts, mechanisms, comparisons, workflows, tradeoffs, hero artwork, editorial character scenes, and reusable layout illustrations featuring the glasses stick figure and warm-yellow Border Collie."
+name: oil-visual-sardine
+description: "Create a consistent oil-style visual system in two modes: finished explanatory images with short accurate labels generated directly inside the scene, and transparent character illustrations produced with a bundled background-removal script. Use for concepts, mechanisms, comparisons, workflows, tradeoffs, hero artwork, editorial character scenes, and reusable layout illustrations featuring the fixed 沙丁 character and supporting 小浪花 character."
 ---
 
 # Oil Visual
@@ -31,10 +31,25 @@ If the destination is unclear, choose Mode A when the image itself must communic
 
 ## Shared visual language
 
+- For every image containing 「沙丁」 or 「小浪花」, first read and follow [references/character-lock.md](references/character-lock.md). The canonical PNG assets are mandatory identity inputs, not optional inspiration.
+- Direction means the character's body heading, not its gaze. Before generating, choose the matching left/right directional canonical and preserve the full topology according to [references/direction-lock.md](references/direction-lock.md); never change direction by turning only the face or moving only the tail.
+- Use [references/color-lock.md](references/color-lock.md) as the sole fixed-character color authority. Preserve those identity colors independently from the scene's optional semantic accents.
 - Draw confident black manga/comic ink outlines with varied line weight and restrained circular halftone screentone.
-- Keep the recurring characters: a minimal stick-figure protagonist with a round head, thin round glasses, dot eyes, a simple smile, and thin line-drawn limbs; plus a chubby warm-yellow Border Collie companion.
-- Keep characters secondary to the subject's evidence or action.
-- Use black, white, and halftone gray as the base. Use warm yellow for the dog, small light patches, and sparse star accents.
+- Use one recurring fixed character: 「沙丁」, a small, rounded, slightly streamlined anthropomorphic sardine. It is not a realistic fish, a seafood brand mascot, or a generic cartoon fish.
+- Draw 「沙丁」 as a vertical rounded fish/seed-shaped body with a simple friendly face, a slightly asymmetrical streamlined tail fin, and two minimal black line arms and two minimal black line legs for holding props, pointing to relationships, and participating in the scene.
+- Keep the fixed face: two small round dot eyes and a short arc smile; do not add complex facial features. Signature details are a small graphite-gray dot-eye combination, low-saturation warm-yellow main body and fins, one small muted sea-mist-blue or sand-colored supporting area, and one slight asymmetrical cut/offset.
+- Keep 「沙丁」 clean, approachable, professional, restrained, and memorable. Use black comic ink with varied line weights, circular halftone dots, off-white paper texture, and low-saturation warm yellow; retain all other shared style constraints below.
+- Before generating any scene containing 「沙丁」, determine its body heading and load the matching `assets/sadin-facing-left.png` or `assets/sadin-facing-right.png` according to [references/direction-lock.md](references/direction-lock.md). `assets/sadin-character.png` is only a compatibility alias. Never regenerate 「沙丁」 from text alone.
+- Keep 「沙丁」 secondary to the subject's evidence or action, especially in Mode A.
+- Add a second fixed supporting character: 「小浪花」, a single low, rounded wave silhouette with a crest curling to one side, a foam cap or a few foam beads, and one slight asymmetrical notch.
+- Keep 「小浪花」's face to two small round dot eyes and a short arc smile, with minimal black line arms and legs. Continue the black comic ink, circular halftone dots, and restrained low-saturation warm-yellow, off-white, sand-colored, and small sea-mist-blue palette.
+- Use 「小浪花」 only as a companion: it may accompany, respond, create visual rhythm, or support/emphasize the focal point, but must not compete with the subject's information or action. 「沙丁」 and 「小浪花」 may collaborate while keeping this hierarchy visible.
+- When both characters appear, keep 「沙丁」 visibly larger as the protagonist. The approved composition target is 「小浪花」 at `39.2%` of 「沙丁」's visible height; accept `38–42%` in ordinary same-plane scenes. Treat 「沙丁」 as 100 visible-height units and 「小浪花」 as 39.2 units in the first prompt, on the same ground plane. Keep 50% as an absolute rejection limit. Because 「小浪花」 is naturally wider, keep its total visual weight subordinate.
+- Treat the ratio as an acceptance gate, not as a promise that a generative edit can produce exact geometric scaling. Never describe an out-of-range draft as approved.
+- Do not spend repeated image-generation calls chasing this ratio. Generate the complete scene once. If ratio alone is wrong, measure the rendered visible-height ratio `r`, compute one correction factor `f = 0.392 / r`, and allow at most one targeted edit that uniformly scales the complete 「小浪花」 by `f` while preserving the scene. Never make a second ratio-only generation call. If that single correction still misses 38–42%, use deterministic scaling/compositing when the character is separable; otherwise stop and report the miss instead of generating again without user approval.
+- Do not draw 「小浪花」 as an ordinary wave logo, a seascape, realistic splashing water, a complex ocean illustration, a lighthouse, a buoy, or any other character.
+- Before generating any scene containing 「小浪花」, determine its directional topology and load the matching `assets/small-wave-facing-left.png` or `assets/small-wave-facing-right.png` according to [references/direction-lock.md](references/direction-lock.md). `assets/small-wave-character.png` is only a compatibility alias. Never regenerate 「小浪花」 from text alone.
+- Use black, white, and halftone gray as the base. Keep the fixed warm-yellow body/fins and supporting accent restrained.
 - Add at most two muted semantic colors. Common mapping: blue = input/content, orange = action/warning/cost, purple = process, green = successful result.
 - Avoid 3D, glossy gradients, photorealism, wobbly sketch lines, generic card grids, dashboards, decorative clutter, and watermarks.
 
@@ -54,6 +69,8 @@ labels: exact short strings plus the evidence surface for each label
 ```
 
 Show the input, action or relation, and result. Keep one dominant focal action and no more than three major visual regions. For multiple steps, use a simple left-to-right or top-to-bottom sequence.
+
+When both fixed characters are present, let 「沙丁」 carry or join the main evidence action and let 「小浪花」 accompany, respond, create rhythm, or support/emphasize the focal point. Keep 「小浪花」 secondary so it never becomes a competing information center. In the initial composition, explicitly define 「沙丁」 as 100 visible-height units and 「小浪花」 as 39.2 units on the same ground plane; accept 38–42% and never above 50%. Follow the one-correction limit in Shared visual language rather than repeatedly regenerating the scene.
 
 ### 2. Design the labels
 
@@ -79,17 +96,29 @@ and readable. Place "<label 1>" on <evidence surface>; place "<label 2>" on
 Use this order:
 
 1. State the concrete claim and shared task.
-2. Describe the real setting and the protagonist/dog action.
+2. Describe the real setting, the fixed 「沙丁」 character's action, and—when used—the 「小浪花」 companion's supporting response.
 3. Describe the evidence objects and their geometry: aligned, nested, connected, split, transformed, repeated, or converging.
 4. Assign semantic colors.
 5. Quote the exact labels and specify each placement.
 6. Add the Mode A style anchor.
 7. End with exclusions.
 
+Add this block whenever a fixed character appears:
+
+```text
+Input images: Image 1 is the direction-matched canonical identity reference
+for 「沙丁」; Image 2 is the direction-matched canonical identity reference
+for 「小浪花」. Use only the
+images required by this scene. Preserve each referenced character's exact
+silhouette, proportions, face placement, major color-block topology, and
+signature structures. Change only pose, limb placement, held objects, slight
+tilt, and necessary overlap. A generic sardine or generic wave is incorrect.
+```
+
 Mode A style anchor:
 
 ```text
-Professional editorial manga/comic ink illustration. Clean confident black ink outlines with varied line weights, expressive but controlled. Use classic circular halftone screentone for gray and shadow areas. Minimal cute stick-figure protagonist with round head, thin round glasses, dot eyes, simple smile, and thin line-drawn limbs. Include a chubby warm-yellow Border Collie companion. Use an off-white lightly textured real environment, not a blank white canvas. Typography is modern sans-serif, medium or bold, large and readable. Color is restrained: black, white, halftone gray, warm yellow for the dog, plus at most two muted semantic accent colors. No 3D, no glossy gradients, no photorealism, no generic card grid, no dashboard, no decorative clutter, no tiny text, no long paragraphs, no watermark.
+Professional editorial manga/comic ink illustration. Clean confident black ink outlines with varied line weights, expressive but controlled. Use classic circular halftone screentone for gray and shadow areas. Include one fixed 「沙丁」 character: a small, rounded, slightly streamlined anthropomorphic sardine with a vertical rounded fish/seed-shaped body, a simple friendly face with two small round dot eyes and a short arc smile, a slightly asymmetrical streamlined tail fin, and minimal black line arms and legs. 「沙丁」 is not a realistic fish, a seafood brand mascot, or a generic cartoon fish. Add the second fixed supporting character 「小浪花」: a single low, rounded wave silhouette with a crest curling to one side, a foam cap or a few foam beads, a slight asymmetrical notch, two small round dot eyes, a short arc smile, and minimal black line arms and legs. Use 「小浪花」 to accompany, respond, create rhythm, or support/emphasize the focal point, never to compete with the subject's information. When both characters appear on the same ground plane, define 「沙丁」 as 100 visible-height units and 「小浪花」 as 39.2 units; accept 38–42% and never above 50%. Keep its total visual weight clearly lower. Continue the same black comic ink and circular halftone dots, with a restrained palette of low-saturation warm yellow, off-white, sand-colored areas, and a small amount of sea-mist blue. Do not draw 「小浪花」 as an ordinary wave logo, seascape, realistic splashing water, complex ocean illustration, lighthouse, buoy, or any other character. Use an off-white lightly textured real environment, not a blank white canvas. Typography is modern sans-serif, medium or bold, large and readable. Color is restrained: black, white, halftone gray, low-saturation warm yellow for 「沙丁」's main body and fins, one small muted sea-mist-blue or sand-colored supporting area, plus at most two muted semantic accent colors. Preserve one slight asymmetrical cut/offset. No 3D, no glossy gradients, no photorealism, no generic card grid, no dashboard, no decorative clutter, no tiny text, no long paragraphs, no watermark.
 ```
 
 ### 4. Inspect and retry
@@ -98,6 +127,10 @@ Professional editorial manga/comic ink illustration. Clean confident black ink o
 2. Compare every label with the brief character by character. Confirm that each appears exactly once and that no stray text was added.
 3. Reject missing, duplicated, invented, or misspelled labels.
 4. Regenerate with one targeted correction while repeating all scene and style invariants. Do not conceal an error with a separate text layer.
+
+Separately, compare every rendered fixed character side by side with its canonical PNG using `references/character-lock.md`. Reject a character that is merely the same category, species, or motif instead of the same fixed identity; correct only the drifting character while preserving the original retry rules above.
+
+For a ratio-only failure, this targeted correction is the only additional image-generation call allowed. Measure visible character bounds, compute `f = 0.392 / current_ratio`, and request that exact uniform scale factor once. Do not make further ratio-only generations; use deterministic compositing if available or stop and report the miss.
 
 Use this retry instruction:
 
@@ -111,7 +144,7 @@ Do not add, remove, translate, or repeat any other text.
 
 ### 1. Describe one reusable scene
 
-Use one character action and only the objects needed to establish it. Examples: drawing at a desk, inspecting a document, holding a blueprint, or presenting a finished result. Leave generous padding around the subject so the cutout can be composed safely.
+Use the fixed pair when the scene benefits from collaboration: give 「沙丁」 one clear reusable action, and let 「小浪花」 accompany, respond, create rhythm, or support/emphasize the focal point. Use only the objects needed to establish the action, keep 「小浪花」 secondary, and leave generous padding around the subject so the cutout can be composed safely. When both appear, define 「沙丁」 as 100 visible-height units and 「小浪花」 as 39.2 units on the same baseline; accept 38–42%, never above 50%, and keep its total visual weight clearly lower. The one-correction generation budget applies to Mode B too. Examples: drawing at a desk, inspecting a document, holding a blueprint, or presenting a finished result.
 
 ### 2. Build the prompt
 
@@ -123,11 +156,27 @@ Replace `<KEY_COLOR>` with the selected hex color before sending the prompt.
 Style: professional manga/comic ink illustration. Clean confident ink outlines
 with varying line weights, thick for contours and thin for details, not wobbly
 or sketchy. Heavy use of classic circular halftone screentone dot patterns for
-all gray and shadow areas. The main character is a cute minimal stick figure
-with a round head, thin round glasses, dot eyes, simple smile, and thin
-line-drawn limbs. Include a chubby warm-yellow Border Collie companion.
+all gray and shadow areas. The single fixed main character is 「沙丁」, a small,
+rounded, slightly streamlined anthropomorphic sardine with a vertical rounded
+fish/seed-shaped body, a simple friendly face with two small round dot eyes and
+a short arc smile, a slightly asymmetrical streamlined tail fin, and minimal
+black line arms and legs. 「沙丁」 is not a realistic fish, a seafood brand
+mascot, or a generic cartoon fish. Preserve one slight asymmetrical cut/offset.
+The second fixed supporting character is 「小浪花」: a single low, rounded wave
+silhouette with a crest curling to one side, a foam cap or a few foam beads, a
+slight asymmetrical notch, two small round dot eyes, a short arc smile, and
+minimal black line arms and legs. Use 「小浪花」 to accompany, respond, create
+rhythm, or support/emphasize the focal point, never to compete with the main
+subject. When both characters appear, define 「沙丁」 as 100 visible-height
+units and 「小浪花」 as 39.2 units on the same baseline; accept 38–42%, with 50% as an absolute
+rejection limit. Keep its total visual weight clearly lower. Continue the black comic ink, circular halftone dots, and restrained
+low-saturation warm-yellow, off-white, sand-colored, and small sea-mist-blue
+palette. Do not draw 「小浪花」 as an ordinary wave logo, seascape, realistic
+splashed water, complex ocean illustration, lighthouse, buoy, or any other
+character.
 Color usage is extremely restrained: 90% black, white, and gray halftone;
-warm yellow only on the dog, small light patches, and sparse star accents.
+low-saturation warm yellow only on 「沙丁」's main body and fins, with one small
+muted sea-mist-blue or sand-colored supporting area and sparse semantic accents.
 The background must be a perfectly uniform flat <KEY_COLOR> rectangle with zero
 gradient, texture, noise, speckles, shadows, floor plane, or lighting variation.
 Do not let halftone, ink, props, or the subject touch the image border. Keep
@@ -162,7 +211,8 @@ The script samples the image border, builds a soft alpha matte from color distan
 ### 5. Validate the transparent result
 
 - Confirm the output is RGBA and all four corners have alpha `0`.
-- Confirm the subject remains complete, including glasses, thin limbs, dog ears, tail, and small props.
+- Compare every present fixed character with its canonical PNG and reject silhouette, proportion, face-layout, color-block, fin, crest, foam-bead, or signature-detail drift.
+- Confirm the subject remains complete, including 「沙丁」's face, thin line arms and legs, tail fin, asymmetrical detail, and small props.
 - Check for a gray fringe at 100% zoom.
 - Confirm internal white and halftone areas were not erased.
 - Regenerate the source instead of forcing the algorithm when the background is visibly uneven.
@@ -180,7 +230,10 @@ For every output:
 
 - The subject is recognizable in about 3 seconds.
 - The main action or relation is clear in about 10 seconds.
-- Characters support the subject instead of becoming generic decoration.
+- Every present fixed character passes the canonical side-by-side identity checklist; category-level resemblance is not sufficient.
+- 「沙丁」 supports the subject instead of becoming generic decoration.
+- When present, 「小浪花」 accompanies or emphasizes the focal point without competing with the subject's information.
+- When both characters appear, 「小浪花」 is clearly smaller—targeting exactly 39.2% of 「沙丁」's visible height and measuring 38–42% in an ordinary same-plane scene—and its wider silhouette does not make its total visual weight compete with 「沙丁」. Apply the measured one-correction rule for a ratio miss; never loop on ratio-only image generation. Reject any result above the absolute 50% height limit.
 - Line work, halftone, warm yellow, and semantic accents remain consistent.
 
 For Mode A:
@@ -194,4 +247,5 @@ For Mode B:
 
 - Background removal is clean and the output has real transparency.
 - Thin details and internal halftone regions remain intact.
+- When both fixed characters are present, 「沙丁」 carries the reusable action and 「小浪花」 remains a supporting companion.
 - No source background, fringe, shadow, or border artifact remains.

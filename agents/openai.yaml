@@ -1,4 +1,4 @@
 interface:
-  display_name: "Oil Visual"
-  short_description: "Create labeled explainers and transparent illustrations"
-  default_prompt: "Use $oil-visual to create either a finished explanatory image or a transparent character illustration in the oil manga-ink style."
+  display_name: "Oil Visual Sardine"
+  short_description: "Create fixed-character Sardine visuals in two modes"
+  default_prompt: "Use $oil-visual-sardine to create either a finished explanatory image or a transparent character illustration in the oil manga-ink style with the two fixed characters: 沙丁 and 小浪花. Keep 小浪花 as a restrained supporting companion that accompanies, responds, creates rhythm, or supports the focal point without competing with the main information."
