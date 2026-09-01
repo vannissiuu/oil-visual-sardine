@@ -21,13 +21,13 @@ if (missing.length > 0) {
 }
 
 const version = readFileSync(resolve(root, 'VERSION'), 'utf8').trim();
-if (!/^\\d+\\.\\d+\\.\\d+$/.test(version)) {
+if (!/^[0-9]+\.[0-9]+\.[0-9]+$/.test(version)) {
   console.error('VERSION is not semantic versioning: ' + version);
   process.exit(1);
 }
 
 const skill = readFileSync(resolve(root, 'SKILL.md'), 'utf8');
-const forbiddenAbsolutePath = /(?:^|[\\s`])\\/(?:Users|home|private|tmp)\\//m;
+const forbiddenAbsolutePath = /(?:^|[\s`])\/(?:Users|home|private|tmp)\//m;
 if (forbiddenAbsolutePath.test(skill)) {
   console.error('SKILL.md contains a machine-specific absolute path');
   process.exit(1);
